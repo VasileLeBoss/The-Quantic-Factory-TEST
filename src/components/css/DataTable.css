@@ -1,0 +1,15 @@
+.data-table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    
+
+    thead{
+        
+    }
+    td{
+        
+        padding-block: 12px;
+        text-transform: capitalize;
+    }
+}

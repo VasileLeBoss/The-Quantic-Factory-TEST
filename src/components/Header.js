@@ -2,7 +2,7 @@ import './css/Header.css';
 
 function Header() {
     return(
-        <header>
+        <header className='main-header'>
             <h1>The Quantic Factory</h1>
         </header>
     );
