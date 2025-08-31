@@ -1,6 +1,6 @@
 .data-table-container{
     overflow-x: auto;
-    height: calc(100vh - 64px - 72px );
+    height: calc(100vh - 64px - 72px - 36px );
     overflow-y: auto;
     width: 100%;
 }
@@ -15,6 +15,17 @@
         position: sticky;
         background-color: var(--background-color);
         top: 0;
+    }
+    
+    th>span{
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        ion-icon{
+            font-size: 1.2rem;
+            
+        }
     }
 
     td,th{

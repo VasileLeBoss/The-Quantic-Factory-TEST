@@ -8,13 +8,13 @@ function DataTable({ rows, loading }) {
             <table className="data-table">
                 <thead>
                     <tr>
-                        <th>Nom</th>
-                        <th>Type</th>
+                        <th><span>Nom</span></th>
+                        <th><span><ion-icon name="leaf-outline"></ion-icon>Type</span></th>
                         {/* <th>Dataset</th> */}
-                        <th>Payant</th>
-                        <th>Arr.</th>
+                        <th><span><ion-icon name="cash-outline"></ion-icon>Payant</span></th>
+                        <th><span>Arr.</span></th>
                         {/* <th>Ouverture</th> */}
-                        <th>Adresse</th>
+                        <th><span><ion-icon name="location-outline"></ion-icon>Adresse</span></th>
                         <th>[dataset]</th>
                     </tr>
                 </thead>

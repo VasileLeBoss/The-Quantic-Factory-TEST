@@ -19,7 +19,9 @@ function buildRefineQuery(filters, src) {
   // Champs disponibles par dataset fait parce que les API sont différentes
   // et n'ont pas les mêmes champs pour les filtres
   const datasetFields = {
-    "Espaces verts": ["type", "arrondissement","payant"], // payant n'existe pas mais pour uniformiser le code et éviter d'avoir des enregistrements payant d'espaces verts quand on filtre sur payant OUi
+    // payant n'existe pas mais pour uniformiser le code et éviter d'avoir des 
+    // enregistrements payant d'espaces verts quand on filtre sur payant OUi
+    "Espaces verts": ["type", "arrondissement","payant"], 
     "Équipements": ["type", "arrondissement", "payant"]
   };
 
