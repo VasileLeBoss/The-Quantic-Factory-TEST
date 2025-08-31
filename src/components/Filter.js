@@ -1,17 +1,53 @@
 // src/components/Filter.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './css/Filter.css';
 
 function Filter({ totalCount = 0, onFilterChange = () => {}}) {
+  const [types, setTypes] = useState([]);
   const [kind, setKind] = useState("");
   const [arrondissement, setArrondissement] = useState("");
   const [payant, setPayant] = useState("");
+   const [loading, setLoading] = useState(true);
 
-  const TYPES = [
-    'Promenades ouvertes','Décorations sur la voie publique','Bois','Jardins grandes institutions',"Jardins d'Etat","Jardinets décoratifs","Cimetières",
-    "Cimetières non parisiens","Ephémères, partagés, pédagogiques","Jardins privatifs","Baignade extérieure","Bains-douches","Bibliothèque","Brumisateur",
-    "Découverte et Initiation","Lieux de culte","Mairie d'arrondissement","Musée","Ombrière pérenne","Ombrière temporaire","Piscine","Terrain de boules"
-  ];
+
+ useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+
+        // recuperer les types des deux datasets
+        const urls = [
+          "https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/ilots-de-fraicheur-espaces-verts-frais/records?select=type&group_by=type",
+          "https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/ilots-de-fraicheur-equipements-activites/records?select=type&group_by=type"
+        ];
+
+        // Appels en parallèle
+        const responses = await Promise.all(urls.map(url => fetch(url)));
+
+        responses.forEach(res => {
+          if (!res.ok) throw new Error(`Erreur fetch ${res.url}`);
+        });
+
+        const data = await Promise.all(responses.map(res => res.json()));
+        const allTypes = data.flatMap(d => d.results || []);
+        const uniqueTypes = Array.from(new Map(allTypes.filter(t => t.type).map(t => [t.type, t])).values());
+
+        setTypes(uniqueTypes);
+      } catch (err) {
+        console.error("Erreur lors du fetch :", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [types]);
+
+  // const TYPES = [
+  //   'Promenades ouvertes','Décorations sur la voie publique','Bois','Jardins grandes institutions',"Jardins d'Etat","Jardinets décoratifs","Cimetières",
+  //   "Cimetières non parisiens","Ephémères, partagés, pédagogiques","Jardins privatifs","Baignade extérieure","Bains-douches","Bibliothèque","Brumisateur",
+  //   "Découverte et Initiation","Lieux de culte","Mairie d'arrondissement","Musée","Ombrière pérenne","Ombrière temporaire","Piscine","Terrain de boules"
+  // ];
 
   const resetFilters = () => {
     setKind("");
@@ -33,8 +69,6 @@ function Filter({ totalCount = 0, onFilterChange = () => {}}) {
     <div className="filter">
       <div className="filter-header">
         <h3 className="total-count">{totalCount} enregistrements</h3>
-        {/* <h2 ><ion-icon name="filter-outline"></ion-icon> Filtres</h2> */}
-
         
       </div>
 
@@ -44,9 +78,10 @@ function Filter({ totalCount = 0, onFilterChange = () => {}}) {
             <label>Type</label>
             <select value={kind} onChange={(e) => { const v = e.target.value; setKind(v); send({ kind: v }); }} >
               <option value="">Tous</option>
-              {TYPES.map(t => (
-                <option key={t} value={t}>{t}</option>
+              {types.map(t => (
+                <option key={t.type} value={t.type}>{t.type}</option>
               ))}
+
             </select>
 
           </div>

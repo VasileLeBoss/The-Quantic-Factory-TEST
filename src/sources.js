@@ -14,16 +14,16 @@ export const OPEN_DATA_SOURCES = [
       openDays:
         record.horaires_periode ||
         [
-          record.horaires_lundi,
-          record.horaires_mardi,
-          record.horaires_mercredi,
-          record.horaires_jeudi,
-          record.horaires_vendredi,
-          record.horaires_samedi,
-          record.horaires_dimanche,
+          record.horaires_lundi?.trim() ? `Lundi: ${record.horaires_lundi}` : null,
+          record.horaires_mardi?.trim() ? `Mardi: ${record.horaires_mardi}` : null,
+          record.horaires_mercredi?.trim() ? `Mercredi: ${record.horaires_mercredi}` : null,
+          record.horaires_jeudi?.trim() ? `Jeudi: ${record.horaires_jeudi}` : null,
+          record.horaires_vendredi?.trim() ? `Vendredi: ${record.horaires_vendredi}` : null,
+          record.horaires_samedi?.trim() ? `Samedi: ${record.horaires_samedi}` : null,
+          record.horaires_dimanche?.trim() ? `Dimanche: ${record.horaires_dimanche}` : null,
         ]
           .filter(Boolean)
-          .join(", ") ||
+          .join("\n") ||
         record.statut_ouverture ||
         "Voir site",
       dataset: "Espaces verts",
@@ -44,16 +44,16 @@ export const OPEN_DATA_SOURCES = [
       openDays:
         record.horaires_periode ||
         [
-          record.horaires_lundi,
-          record.horaires_mardi,
-          record.horaires_mercredi,
-          record.horaires_jeudi,
-          record.horaires_vendredi,
-          record.horaires_samedi,
-          record.horaires_dimanche,
+          record.horaires_lundi?.trim() ? `Lundi: ${record.horaires_lundi}` : null,
+          record.horaires_mardi?.trim() ? `Mardi: ${record.horaires_mardi}` : null,
+          record.horaires_mercredi?.trim() ? `Mercredi: ${record.horaires_mercredi}` : null,
+          record.horaires_jeudi?.trim() ? `Jeudi: ${record.horaires_jeudi}` : null,
+          record.horaires_vendredi?.trim() ? `Vendredi: ${record.horaires_vendredi}` : null,
+          record.horaires_samedi?.trim() ? `Samedi: ${record.horaires_samedi}` : null,
+          record.horaires_dimanche?.trim() ? `Dimanche: ${record.horaires_dimanche}` : null,
         ]
           .filter(Boolean)
-          .join(", ") ||
+          .join("\n") ||
         record.statut_ouverture ||
         "voir site",
       dataset: "Équipements",

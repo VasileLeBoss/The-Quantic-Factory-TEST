@@ -69,7 +69,15 @@ function Modal({ isOpen, onClose, content }) {
                 
                 <div className='info'>
                     <div className='label'><span>Horaires d'ouvertures</span></div>
-                    <p className='value'>{content.openDays}</p>
+                    <p className='value'>
+                    {content.openDays.split("\n").map((line, idx) => (
+                        <span key={idx}>
+                        {line}
+                        <br />
+                        </span>
+                    ))}
+                    </p>
+
                 </div>
 
             {/* <p><strong>Type :</strong> </p>

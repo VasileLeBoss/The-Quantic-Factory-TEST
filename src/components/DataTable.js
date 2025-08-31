@@ -67,7 +67,10 @@ function DataTable({ rows, loading }) {
 
             <Modal 
                 isOpen={isModalOpen} 
-                onClose={() => setIsModalOpen(false)} 
+                onClose={() => {
+                    setIsModalOpen(false)
+                    setModalContent(null);
+                }} 
                 content={modalContent} 
             />
         </div>

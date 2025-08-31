@@ -69,7 +69,7 @@
                 padding-bottom: 6px;
                 border-bottom: 1px solid var(--gray-light);
                 position: relative;
-
+                
                 .copy-button{
                     position: absolute;
                     right: 0;
@@ -90,6 +90,9 @@
                     text-transform: uppercase;
                     color: var(--gray-dark);
                     font-weight: 600; 
+                }
+                .value{
+                    white-space: pre-line ;
                 }
             }     
         }
