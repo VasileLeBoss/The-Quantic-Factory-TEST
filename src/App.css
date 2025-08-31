@@ -4,4 +4,20 @@
     max-width: 1200px;
     margin-inline: auto; 
     padding-inline: 6px ;
+    
+    overflow: hidden;
+}
+
+.data-container{
+    display: flex;
+    gap: 32px;
+    margin-top: 64px;
+}
+
+@media screen and (max-width: 768px) {
+    .data-container{
+        flex-direction: column;
+        margin-top: 32px;
+    }
+    
 }

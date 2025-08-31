@@ -1,0 +1,45 @@
+.filter{
+    min-width: 224px;
+    padding: 12px 8px;
+
+    .total-count{
+        font-weight: normal;
+        margin-bottom: 8px;
+    }
+
+    .filter-item{
+        display: flex;
+        flex-direction: column;
+
+        margin-top: 12px;
+
+        label{
+            
+            margin-bottom: 4px;
+        }
+
+        input, select{
+            padding: 8px;
+            border: 1px solid var(--gray-light);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    }
+
+    button{
+        margin-top: 12px;
+        padding: 8px;
+        border: none;
+        background-color: var(--main-color);
+        color: white;
+        
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        &:hover{
+            background-color: var(--secondary-color);
+        }
+    }
+
+
+}
