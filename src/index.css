@@ -2,7 +2,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  /* background-color: var(--background-color); */
 }
 * {
   box-sizing: border-box;
@@ -21,8 +21,16 @@ p, a, span, li, button,tr, label, input, button {
 :root{
   --main-color:#5f259f;
   --secondary-color:#7830c6;
+  --table-header-color: #f5effb;
   --background-color:#f5f5f5;
   --text-color:#1a1a1a;
   --gray-dark:#777;
   --gray-light:#ddd;
+  --blue-light:#e0f0ff;
+  --blue-dark:#007bff;
+  --green-light:#e5f7e5;
+  --green-dark:#28a745;
+  --red-light:#fdd3c4;
+  --red-dark:#dc3545;
+
 }

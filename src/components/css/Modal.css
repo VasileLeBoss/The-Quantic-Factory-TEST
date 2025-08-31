@@ -1,0 +1,116 @@
+.modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(4px);
+
+
+    .modal-content{
+        margin-inline: 8px;
+        background-color: #ffffff;
+        padding: 32px;
+        border-radius: 8px;
+        border: 1px solid var(--gray-light);
+        width: 100%;
+        position: relative;
+        max-width: 460px;
+        max-height: 80vh;
+        overflow-y: auto;
+        
+
+        .badge{
+            display: inline-block;
+            
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+
+            &.equipements{
+                background-color: var(--blue-light);
+                color: var(--blue-dark);
+            }
+            &.espaces_verts{
+                background-color: var(--green-light);
+                color: var(--green-dark);
+            }
+
+            &.Non{
+                background-color: var(--main-color);
+                color: #ffffff;
+                margin-left: 8px;
+            }
+
+            &.Oui{
+                background-color: var(--red-light);
+                color: var(--red-dark);
+                margin-left: 8px;
+            }
+        }
+        .modal-body{
+            h2{
+                font-size: clamp(1.2rem, 2vw, 1.5rem);
+                text-transform: capitalize;
+                margin-bottom: 16px;
+            }   
+
+            .info{
+                margin-bottom: 6px;
+                padding-bottom: 6px;
+                border-bottom: 1px solid var(--gray-light);
+                position: relative;
+
+                .copy-button{
+                    position: absolute;
+                    right: 0;
+                    bottom: 6px;
+                    background: none;
+                    border: none;
+                    display: flex;
+                    cursor: pointer;
+
+                    &:hover{
+                        color: var(--main-color);
+                    }
+                }
+
+                .label{
+                    font-size: 0.7rem;
+                    margin-bottom: 4px;
+                    text-transform: uppercase;
+                    color: var(--gray-dark);
+                    font-weight: 600; 
+                }
+            }     
+        }
+        
+
+        
+
+        .modal-close{
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            display: flex;
+            background: none;
+            border: none;
+            color: var(--gray-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+
+            &:hover{
+                color: #000000;
+            }
+        }
+    }
+}

@@ -1,7 +1,10 @@
 import './css/DataTable.css';
+import Modal from './Modal'; 
+import { useState } from 'react';
 
 function DataTable({ rows, loading }) {
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState(null);
 
     return (
         <div className="data-table-container">
@@ -15,14 +18,14 @@ function DataTable({ rows, loading }) {
                         <th><span>Arr.</span></th>
                         {/* <th>Ouverture</th> */}
                         <th><span><ion-icon name="location-outline"></ion-icon>Adresse</span></th>
-                        <th>[dataset]</th>
+                        {/* <th>[dataset]</th> */}
                     </tr>
                 </thead>
                 {loading ? (
                     <tbody className="animate-pulse">
-                        {[...Array(12)].map((_, i) => (
+                        {[...Array(14)].map((_, i) => (
                             <tr key={i}>
-                                {[...Array(6)].map((_, j) => (
+                                {[...Array(5)].map((_, j) => (
                                     <td key={j}><span></span></td>
                                 ))}
                             </tr>
@@ -31,12 +34,17 @@ function DataTable({ rows, loading }) {
                 ) : (
                     <tbody className='loaded-data'>
                         {rows.length === 0 ? (
-                            <tr>
-                                <td colSpan={6}>Aucune donnée disponible</td>
+                            <tr className="no-data">
+                                <td colSpan={5}>Aucune donnée disponible</td>
                             </tr>
                         ) : (
-                            rows.map((r) => (
-                                <tr key={r.id}>
+                            rows.map((r, idx) => (
+                                <tr key={`${r.id || r.name}-${r.type}-${r.arrondissement}-${idx}`} 
+                                    onClick={() => {
+                                        setModalContent(r);
+                                        setIsModalOpen(true);
+                                        }}
+                                    >
                                     <td>{r.name}</td>
                                     <td>{r.kind}</td>
                                     {/* <td>{r.dataset}</td> */}
@@ -44,13 +52,19 @@ function DataTable({ rows, loading }) {
                                     <td>{r.arrondissement}</td>
                                     {/* <td>{r.openDays}</td> */}
                                     <td>{r.address}</td>
-                                    <td>{r.dataset}</td>
+                                    {/* <td>{r.dataset}</td> */}
                                 </tr>
                             ))
                         )}
                     </tbody>
                 )}
             </table>
+
+            <Modal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                content={modalContent} 
+            />
         </div>
     );
 }

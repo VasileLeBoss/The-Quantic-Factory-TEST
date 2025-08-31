@@ -13,6 +13,13 @@ function Filter({ totalCount = 0, onFilterChange = () => {}}) {
     "Découverte et Initiation","Lieux de culte","Mairie d'arrondissement","Musée","Ombrière pérenne","Ombrière temporaire","Piscine","Terrain de boules"
   ];
 
+  const resetFilters = () => {
+    setKind("");
+    setArrondissement("");
+    setPayant("");
+    onFilterChange({ kind: "", arrondissement: "", payant: "" });
+  }
+
 
   const send = (next) => {
     onFilterChange({
@@ -24,60 +31,68 @@ function Filter({ totalCount = 0, onFilterChange = () => {}}) {
 
   return (
     <div className="filter">
-      <h3 className="total-count">{totalCount} enregistrements</h3>
-      <h2>Filtres</h2>
+      <div className="filter-header">
+        <h3 className="total-count">{totalCount} enregistrements</h3>
+        {/* <h2 ><ion-icon name="filter-outline"></ion-icon> Filtres</h2> */}
 
-
-
-       <div className="filter-item">
-        <label>Type</label>
-        <select value={kind} onChange={(e) => { const v = e.target.value; setKind(v); send({ kind: v }); }} >
-          <option value="">Tous</option>
-          {TYPES.map(t => (
-            <option key={t} value={t}>{t}</option>
-          ))}
-        </select>
-
+        
       </div>
 
-      <div className="filter-item">
-        <label>Arrondissement</label>
-        <select 
-          value={arrondissement}
-          onChange={(e) => { 
-            const v = e.target.value; 
-            setArrondissement(v); 
-            send({ arrondissement: v }); 
-          }}
-        >
-          <option value="">Tous</option>
-          {[...Array(20)].map((_, i) => {
-            const val = i + 1;
-            const formatted = val < 10 ? `7500${val}` : `750${val}`;
-            return <option key={val} value={formatted}>{formatted}</option>;
-          })}
-        </select>
-      </div>
+      <div className="filters-row">
+        <div className="filters-group">
+          <div className="filter-item">
+            <label>Type</label>
+            <select value={kind} onChange={(e) => { const v = e.target.value; setKind(v); send({ kind: v }); }} >
+              <option value="">Tous</option>
+              {TYPES.map(t => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+
+          </div>
+
+          <div className="filter-item">
+            <label>Arr.</label>
+            <select 
+              value={arrondissement}
+              onChange={(e) => { 
+                const v = e.target.value; 
+                setArrondissement(v); 
+                send({ arrondissement: v }); 
+              }}
+            >
+              <option value="">Tous</option>
+              {[...Array(20)].map((_, i) => {
+                const val = i + 1;
+                const formatted = val < 10 ? `7500${val}` : `750${val}`;
+                return <option key={val} value={formatted}>{formatted}</option>;
+              })}
+            </select>
+          </div>
 
 
-      <div className="filter-item">
-        <label>Payant</label>
-        <select
-          value={payant}
-          onChange={(e) => { const v = e.target.value; setPayant(v); send({ payant: v }); }}
-        >
-          <option value="">Tous</option>
-          <option value="Oui">Oui</option>
-          <option value="Non">Non</option>
+          <div className="filter-item">
+            <label>Payant</label>
+            <select
+              value={payant}
+              onChange={(e) => { const v = e.target.value; setPayant(v); send({ payant: v }); }}
+            >
+              <option value="">Tous</option>
+              <option value="Oui">Oui</option>
+              <option value="Non">Non</option>
 
-        </select>
-      </div>
+            </select>
 
-      <div>
-        <button onClick={() => {  setKind(""); setArrondissement(""); setPayant(""); send({ search: "", kind: "", arrondissement: "", payant: "" }); }}>
-          Réinitialiser
-        </button>
-      </div>
+            
+          </div>
+        </div>
+        <button className="reset-filters" onClick={() => resetFilters()}>
+            {/* <span><ion-icon name="options-outline"></ion-icon></span>  */}
+            <span><ion-icon name="refresh-outline"></ion-icon></span>
+          </button>
+       </div> 
+
+      
     </div>
   );
 }

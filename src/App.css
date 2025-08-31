@@ -1,17 +1,27 @@
 
+
 .App{
     width: 100%;
     max-width: 1200px;
+    height: 100vh;
     margin-inline: auto; 
-    padding-inline: 6px ;
-    
+    padding-inline: min(16px, 2%);
     overflow: hidden;
+    position: relative;
+    background-color: #ffffff;
+    padding-bottom: 184px;
+
 }
 
 .data-container{
     display: flex;
-    gap: 32px;
+    flex-direction: column;
     margin-top: 64px;
+    border: 1px solid var(--gray-light);
+    border-radius: 16px;
+    height: 100%;
+    
+   
 }
 
 @media screen and (max-width: 768px) {

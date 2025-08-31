@@ -10,7 +10,7 @@ function App() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
-  const PAGE_SIZE = 60;
+  const PAGE_SIZE = 100;
   const [page, setPage] = useState(1);
 
 function buildRefineQuery(filters, src) {
@@ -21,7 +21,7 @@ function buildRefineQuery(filters, src) {
   const datasetFields = {
     // payant n'existe pas mais pour uniformiser le code et éviter d'avoir des 
     // enregistrements payant d'espaces verts quand on filtre sur payant OUi
-    "Espaces verts": ["type", "arrondissement","payant"], 
+    "Espaces verts": ["type", "arrondissement"], 
     "Équipements": ["type", "arrondissement", "payant"]
   };
 
@@ -46,7 +46,7 @@ function buildRefineQuery(filters, src) {
     refinements.push(`refine=arrondissement:${encodeValue(filters.arrondissement)}`);
   }
 
-  // Filtre payant (uniquement pour Équipements)
+  // Filtre payant
   if (filters.payant && fields.includes("payant")) {
     refinements.push(`refine=payant:${encodeValue(filters.payant)}`);
   }
@@ -64,6 +64,13 @@ function buildRefineQuery(filters, src) {
     try {
       const results = await Promise.all(
         OPEN_DATA_SOURCES.map(async (src) => {
+
+          // Cas particulier : si on filtre sur payant = Oui, on ne doit pas
+          // récupérer des espaces verts car ils sont tous gratuits
+          if (filters.payant==="Oui" && src.name === "Espaces verts") {
+            return { count: 0, rows: [] }; 
+          }
+
           // Construire l'URL + et filtres
           const offset = (page - 1) * PAGE_SIZE;
           let url = `${src.url}?limit=${PAGE_SIZE}&offset=${offset}`;
@@ -79,6 +86,7 @@ function buildRefineQuery(filters, src) {
 
           return {
             count: json.total_count ?? records.length,
+            // adapter les données au format interne et filtrer les enregistrements sans nom
             rows: records.map(src.adapter).filter(r => !!r.name),
           };
         })
