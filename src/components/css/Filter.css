@@ -16,14 +16,15 @@
         justify-content: space-between;
         align-items: end;
         
-        .filters-group{
-        display: flex;
-            gap: 16px;
-        flex-wrap: wrap;
-        }
+        
     }
     
-
+    .filters-group{
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+    }
+    
     .reset-filters{
         display: flex;
         width: fit-content;
