@@ -12,12 +12,15 @@ function DataTable({ rows, loading }) {
                 <thead>
                     <tr>
                         <th><span>Nom</span></th>
+                        
+                        <th><span><ion-icon name="location-outline"></ion-icon>Adresse</span></th>
+                        <th><span>Arr.</span></th>
                         <th><span><ion-icon name="leaf-outline"></ion-icon>Type</span></th>
                         {/* <th>Dataset</th> */}
                         <th><span><ion-icon name="cash-outline"></ion-icon>Payant</span></th>
-                        <th><span>Arr.</span></th>
+                        
                         {/* <th>Ouverture</th> */}
-                        <th><span><ion-icon name="location-outline"></ion-icon>Adresse</span></th>
+                        
                         {/* <th>[dataset]</th> */}
                     </tr>
                 </thead>
@@ -45,13 +48,15 @@ function DataTable({ rows, loading }) {
                                         setIsModalOpen(true);
                                         }}
                                     >
+                                        
                                     <td>{r.name}</td>
+                                    <td>{r.address}</td>
+                                    <td>{r.arrondissement}</td>
                                     <td>{r.kind}</td>
                                     {/* <td>{r.dataset}</td> */}
                                     <td>{r.payant}</td>
-                                    <td>{r.arrondissement}</td>
+                                    
                                     {/* <td>{r.openDays}</td> */}
-                                    <td>{r.address}</td>
                                     {/* <td>{r.dataset}</td> */}
                                 </tr>
                             ))

@@ -60,7 +60,7 @@
         }
         td{
             width: max-content;
-            text-wrap: nowrap;
+            text-wrap: balance;
         }
 
         /* tr:nth-child(even){
@@ -91,4 +91,14 @@
   50% {
     opacity: 0.4;
   }
+}
+
+@media screen and (max-width: 768px) {
+    .data-table{
+        th,td{
+            
+            font-size: 0.875rem;
+        }
+    }
+    
 }
