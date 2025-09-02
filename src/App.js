@@ -11,7 +11,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
   const PAGE_SIZE = 100;
-  const [page, setPage] = useState(1);
 
 function buildRefineQuery(filters, src) {
   const refinements = [];
@@ -59,7 +58,7 @@ function buildRefineQuery(filters, src) {
 
   useEffect(() => {
 
-    async function fetchData(page = 1, filters = {}) {
+    async function fetchData( filters = {}) {
     setLoading(true);
     try {
       const results = await Promise.all(
@@ -72,8 +71,7 @@ function buildRefineQuery(filters, src) {
           }
 
           // Construire l'URL + et filtres
-          const offset = (page - 1) * PAGE_SIZE;
-          let url = `${src.url}?limit=${PAGE_SIZE}&offset=${offset}`;
+          let url = `${src.url}?limit=${PAGE_SIZE}`;
           const refineQuery = buildRefineQuery(filters, src);
           if (refineQuery) url += `&${refineQuery}`;
 
@@ -106,8 +104,8 @@ function buildRefineQuery(filters, src) {
     }
   }
 
-    fetchData(page, filters);
-  }, [page, filters]);
+    fetchData( filters);
+  }, [filters]);
 
   return (
     <div className="App">
